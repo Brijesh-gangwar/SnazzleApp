@@ -11,7 +11,9 @@ class PersonalInformationScreen extends StatelessWidget {
     final agent = context.watch<AgentDetailsProvider>().agentDetails;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Text('Personal Information'),
       ),
 
@@ -54,6 +56,7 @@ class PersonalInformationScreen extends StatelessWidget {
     required Map<String, String?> details,
   }) {
     return Card(
+      color: Colors.white,
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(

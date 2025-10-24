@@ -8,14 +8,14 @@ class OnlineStatusToggleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Use a Consumer to get the latest agent details and rebuild on change
+
     return Consumer<AgentDetailsProvider>(
       builder: (context, provider, child) {
-        // Determine the switch's value from the provider's state
-        // Default to false if details are not yet loaded
+
         final bool isOnline = provider.agentDetails?.status == 'Online';
 
         return Card(
+          color: Colors.white,
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: Padding(
@@ -38,11 +38,10 @@ class OnlineStatusToggleCard extends StatelessWidget {
                   onChanged: (value) {
                     // Determine the new status string
                     final newStatus = value ? 'Online' : 'Offline';
-                    // Call the provider method to update the status
-                    // Use context.read inside a callback for a one-time action
+
                     context.read<AgentDetailsProvider>().updateStatus(newStatus);
                   },
-                  activeColor: Colors.black,
+                  activeColor: isOnline ? Colors.green : Colors.black,
                 ),
               ],
             ),

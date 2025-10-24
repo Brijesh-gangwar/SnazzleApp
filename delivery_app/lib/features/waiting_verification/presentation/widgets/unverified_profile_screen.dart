@@ -24,7 +24,9 @@ class UnverifiedProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Use a Consumer to listen to all state changes from the provider
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Text("Profile"),
       ),
       body: Consumer<AgentDetailsProvider>(

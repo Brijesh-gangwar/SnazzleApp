@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import '../../../../core/helpers/snackbar_fxn.dart';
 import '../../data/models/order_model.dart';
 import 'map_screen.dart';
 
@@ -13,7 +14,7 @@ class LocationButton extends StatefulWidget {
   const LocationButton({
     super.key,
     required this.address,
-    this.buttonText = "View Location",
+    this.buttonText = "Location",
   });
 
   @override
@@ -82,15 +83,16 @@ class _LocationButtonState extends State<LocationButton> {
 
   void _showError(String message) {
     if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message)),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content: Text(message)),
+      // );
+      showCustomMessage(context, message);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
+    return TextButton.icon(
       onPressed: _isLoading ? null : _handleLocation,
       icon: _isLoading
           ? const SizedBox(

@@ -7,6 +7,7 @@ import '../../../auth/data/services/auth_service.dart';
 import '../../../../core/helpers/online_status_toggle_card.dart';
 import '../widgets/personal_info_screen.dart';
 import '../../../auth/presentation/screens/login_screen.dart'; // Import for navigation
+import 'package:intl/intl.dart';
 
 class AgentDetailsScreen extends StatefulWidget {
   const AgentDetailsScreen({super.key});
@@ -29,6 +30,20 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
     });
   }
 
+  String getJoinedDate(String? dateString) {
+    if (dateString == null) {
+      return 'N/A';
+    }
+    try {
+      final dateTime = DateTime.parse(dateString);
+      // 'MMM yy' formats the date to abbreviated month and two-digit year.
+      return DateFormat('MMM yy').format(dateTime);
+    } catch (e) {
+      // If parsing fails, return an indicator.
+      return 'Invalid';
+    }
+  }
+
   // --- LOGOUT LOGIC ---
   Future<void> _logout() async {
     final authService = AuthService();
@@ -47,6 +62,7 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Consumer<AgentDetailsProvider>(
           builder: (context, provider, child) {
@@ -121,7 +137,7 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
         Expanded(child: _buildStatCard(agent.deliveries?.toString() ?? '0', 'Deliveries')),
         const SizedBox(width: 12),
         // Correctly uses the date formatting helper
-        Expanded(child: _buildStatCard(agent.createdAt!, 'Joined')),
+        Expanded(child: _buildStatCard(getJoinedDate(agent.createdAt), 'Joined')),
       ],
     );
   }

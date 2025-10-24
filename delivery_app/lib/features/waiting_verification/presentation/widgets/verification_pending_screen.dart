@@ -1,5 +1,6 @@
 
 
+import 'package:delivery_app/core/helpers/snackbar_fxn.dart';
 import 'package:flutter/material.dart';
 import '../../../../main.dart'; // Used for navigating back to the SplashScreen
 import '../../../profile/data/services/details_service.dart'; // Import the service
@@ -60,18 +61,22 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   // Helper function to display a SnackBar
   void _showSnackBar(String message, {bool isError = false}) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: isError ? Colors.red : Colors.blue,
-      ),
-    );
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   SnackBar(
+    //     content: Text(message),
+    //     backgroundColor: isError ? Colors.red : Colors.blue,
+    //   ),
+    // );
+
+    showCustomMessage(context, message);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Text("Verification Pending"),
       ),
       body: Padding(
